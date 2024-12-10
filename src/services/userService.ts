@@ -22,11 +22,12 @@ export const authService = {
 
     async register(credentials: RegisterCredentials): Promise<AuthResponse> {
         try {
-            const loginResponse = await this.login({
+            const { data } = await api.post<AuthResponse>('/users/register', {
+              username: credentials.username,
               email: credentials.email,
               password: credentials.password
             });
-            return loginResponse;
+            return data;
           } catch (error: any) {
             console.error('Error en registro:', error.response?.data || error.message);
             throw new Error(error.response?.data?.error || 'Error al registrar usuario');

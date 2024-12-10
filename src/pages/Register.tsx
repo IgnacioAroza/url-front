@@ -13,8 +13,7 @@ export const Register: React.FC = () => {
 
   const handleRegister = async (credentials: RegisterCredentials) => {
     try {
-      const response = await authService.register(credentials);
-      localStorage.setItem('token', response.token);
+      await authService.register(credentials);
       toast.success(t('Registration successful!'));
       navigate('/');
     } catch (error) {
